@@ -18,34 +18,34 @@ const experiences = [
 
 const Experience = () => {
   return (
-    <section id="experience" className="py-16 px-4 bg-white">
+    <section id="experience" className="py-16 px-6 bg-white">
       <div className="container mx-auto">
         <h2 className="text-4xl font-extrabold text-gray-800 mb-10 border-b-2 pb-2 border-blue-500">
           Experience
         </h2>
 
-        <div className="space-y-8">
+        <div className="space-y-10">
           {experiences.map((exp, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="p-6 bg-gray-50 rounded-xl shadow hover:shadow-lg transition"
+              className="p-8 bg-gray-50 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 ease-in-out"
             >
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center space-x-2 text-blue-600 font-semibold text-lg">
-                  <FaBuilding />
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center space-x-3 text-blue-600 font-semibold text-lg">
+                  <FaBuilding className="text-xl" />
                   <span>{exp.company}</span>
                 </div>
                 <div className="flex items-center space-x-1 text-sm text-gray-500">
-                  <FaCalendarAlt />
+                  <FaCalendarAlt className="text-lg" />
                   <span>{exp.duration}</span>
                 </div>
               </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">{exp.role}</h3>
-              <p className="text-gray-600">{exp.description}</p>
+              <h3 className="text-2xl font-bold text-gray-800 mb-3">{exp.role}</h3>
+              <p className="text-gray-600 text-lg">{exp.description}</p>
             </motion.div>
           ))}
         </div>
