@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { FaTools, FaCode, FaCogs, FaVial, FaCheckCircle, FaUserTie } from "react-icons/fa";
+import { FaTools, FaCode, FaCogs, FaVial, FaUserTie } from "react-icons/fa";
 
 const skillCategories = [
   {
@@ -31,13 +31,13 @@ const skillCategories = [
 
 const Skills = () => {
   return (
-    <section className="py-16 px-4 bg-gray-100">
+    <section id="skills" className="py-10 px-6 bg-white">
       <div className="container mx-auto">
         <h2 className="text-4xl font-extrabold text-gray-800 mb-10 border-b-2 pb-2 border-blue-500">
           Skills
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {skillCategories.map((category, index) => (
             <motion.div
               key={index}
@@ -45,10 +45,10 @@ const Skills = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300"
+              className="bg-gray-50 p-6 rounded-xl shadow-md hover:shadow-xl transition-transform duration-300 hover:scale-105"
             >
               <div className="flex items-center mb-3">
-                <span className="text-blue-600 text-xl mr-2">{category.icon}</span>
+                <span className="text-blue-600 text-2xl mr-2">{category.icon}</span>
                 <h3 className="text-xl font-semibold text-gray-800">{category.title}</h3>
               </div>
               <ul className="list-disc list-inside text-gray-600 space-y-1">
