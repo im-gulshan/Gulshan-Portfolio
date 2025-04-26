@@ -3,7 +3,7 @@ import { MdEmail } from "react-icons/md";
 import { FaLinkedin } from "react-icons/fa";
 
 const Contact = () => (
-  <section id="contact" className="py-16 px-6 bg-white">
+  <section id="contact" className="py-8 px-6 bg-white">
     <motion.div
       className="max-w-xl mx-auto text-center"
       initial={{ opacity: 0, y: 30 }}
