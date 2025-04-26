@@ -17,7 +17,7 @@ const About = () => {
           className="w-40 h-40 rounded-full overflow-hidden border-4 border-blue-500 shadow-xl transform transition duration-300 hover:scale-105 hover:shadow-2xl"
         >
           <img
-            src="/gulshan-kumar.jpg"
+            src={`${process.env.PUBLIC_URL}/gulshan-kumar.jpg`}
             alt="Gulshan Kumar Profile"
             className="w-full h-full object-cover"
           />
