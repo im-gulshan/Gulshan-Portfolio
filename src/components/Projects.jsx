@@ -21,7 +21,7 @@ const projectList = [
 
 const Projects = () => {
   return (
-    <section id="projects" className="py-8 px-4 bg-white">
+    <section id="projects" className="py-2 px-4 bg-white">
       <div className="container mx-auto">
         <h2 className="text-4xl font-extrabold text-gray-800 mb-10 border-b-2 pb-2 border-blue-500">
           Projects
