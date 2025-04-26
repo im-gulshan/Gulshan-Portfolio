@@ -3,7 +3,7 @@ import { MdEmail } from "react-icons/md";
 import { FaLinkedin } from "react-icons/fa";
 
 const Contact = () => (
-  <section id="contact" className="py-8 px-6 bg-white">
+  <section id="contact" className="py-4 px-6 bg-white">
     <motion.div
       className="max-w-xl mx-auto text-center"
       initial={{ opacity: 0, y: 30 }}
@@ -24,7 +24,7 @@ const Contact = () => (
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="flex items-center justify-center gap-4 text-blue-500 text-lg"
+          className="flex items-center justify-center gap-4 text-blue-600 text-lg"
         >
           <a
             href="mailto:kgulshan230@outlook.com"
@@ -45,7 +45,7 @@ const Contact = () => (
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           viewport={{ once: true }}
-          className="flex items-center justify-center gap-4 text-blue-500 text-lg"
+          className="flex items-center justify-center gap-4 text-blue-600 text-lg"
         >
           <a
             href="https://www.linkedin.com/in/gulshan98/"
