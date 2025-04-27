@@ -38,7 +38,7 @@ const Experience = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="p-4 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 ease-in-out"
+              className="p-4 bg-gray-50 rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105"
             >
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center space-x-3 text-blue-600 font-semibold text-lg">
