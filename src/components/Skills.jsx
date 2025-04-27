@@ -35,7 +35,7 @@ const Skills = () => {
   const [hoveredCategory, setHoveredCategory] = useState(null);
 
   return (
-    <section id="skills" className="py-0 px-6 bg-white">
+    <section id="skills" className="py-10 px-6 bg-white">
       <div className="container mx-auto">
         <h2 className="text-4xl font-extrabold text-gray-800 mb-10 border-b-2 pb-2 border-blue-500">
           Skills
