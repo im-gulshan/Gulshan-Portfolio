@@ -48,13 +48,13 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="py-6 px-6 bg-white">
-      <div className="container mx-auto">
-        <h2 className="text-4xl font-extrabold text-gray-800 mb-6 border-b-2 pb-2 border-blue-500">
+    <section id="projects" className="py-10 px-6 md:px-16 bg-white">
+      <div className="container mx-auto max-w-screen-xl">
+        <h2 className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-10 border-b-2 pb-2 border-blue-500">
           Projects
         </h2>
 
-        <div className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-1 gap-8">
           {projectList.map((project, index) => (
             <motion.div
               key={index}
@@ -96,7 +96,8 @@ const Projects = () => {
                           initial={{ opacity: 0, x: -20 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ duration: 0.3, delay: idx * 0.1 }}
-                          className="flex items-start"
+                          whileHover={{ scale: 1.05, x: 5 }}
+                          className="flex items-start cursor-pointer"
                         >
                           <span className="mr-2 text-blue-400">➤</span>
                           {point}

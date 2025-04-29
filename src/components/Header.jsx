@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 const Header = () => {
   return (
     <header className="bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 p-4 text-white fixed top-0 w-full z-10 shadow-md">
-      <div className="container mx-auto flex justify-between items-center">
+      <div className="w-full px-6 md:px-20 flex justify-between items-center">
         {/* Branding/Logo */}
         <h1 className="text-3xl font-extrabold cursor-pointer hover:text-gray-300 transition duration-300">Gulshan Kumar</h1>
         
