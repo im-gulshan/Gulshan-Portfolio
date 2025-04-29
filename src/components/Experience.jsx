@@ -24,13 +24,13 @@ const experiences = [
 
 const Experience = () => {
   return (
-    <section id="experience" className="py-6 px-6 bg-white">
-      <div className="container mx-auto">
-        <h2 className="text-4xl font-extrabold text-gray-800 mb-6 border-b-2 pb-2 border-blue-500">
+    <section id="experience" className="py-10 px-6 md:px-16 bg-white">
+      <div className="container mx-auto max-w-screen-xl">
+        <h2 className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-10 border-b-2 pb-2 border-blue-500">
           Experience
         </h2>
 
-        <div className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-1 gap-8">
           {experiences.map((exp, index) => (
             <motion.div
               key={index}
@@ -38,7 +38,7 @@ const Experience = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="p-4 bg-gray-50 rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105"
+              className="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105"
             >
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center space-x-3 text-blue-600 font-semibold text-lg">

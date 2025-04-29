@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { FaArrowUp } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -10,6 +11,7 @@ const ScrollToTopButton = () => {
       const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scrollPercent = (scrollTop / docHeight) * 100;
 
+      // Show the button when scroll reaches 50%
       if (scrollPercent > 50) {
         setIsVisible(true);
       } else {
@@ -26,15 +28,19 @@ const ScrollToTopButton = () => {
   };
 
   return (
-    <button
+    <motion.button
       onClick={scrollToTop}
       className={`fixed bottom-6 right-6 p-3 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 transition-opacity duration-500 z-50 ${
         isVisible ? "opacity-100" : "opacity-0"
       }`}
       aria-label="Scroll to top"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: isVisible ? 1 : 0 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
     >
       <FaArrowUp className="text-xl" />
-    </button>
+    </motion.button>
   );
 };
 

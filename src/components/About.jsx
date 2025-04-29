@@ -1,12 +1,40 @@
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { MdEmail } from "react-icons/md";
 import { FaLinkedin } from "react-icons/fa";
 
 const About = () => {
+  const aboutRef = useRef(null);
+  const [showScrollIndicator, setShowScrollIndicator] = useState(true);
+
+  useEffect(() => {
+    const currentRef = aboutRef.current;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setShowScrollIndicator(entry.isIntersecting && entry.intersectionRatio === 1);
+      },
+      {
+        threshold: 1.0,
+      }
+    );
+
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
+  }, []);
+
   return (
     <section
       id="about"
-      className="py-16 px-6 mt-5 bg-white"
+      ref={aboutRef}
+      className="relative min-h-screen flex items-center px-6 md:px-20 py-24 bg-white"
     >
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-center gap-10 text-center md:text-left">
         
@@ -46,45 +74,39 @@ const About = () => {
             viewport={{ once: true }}
             className="flex flex-wrap items-center gap-8 text-blue-500 text-lg mt-6 justify-center md:justify-start"
           >
-            {/* Email */}
             <div className="flex items-center gap-2">
-              <a
-                href="mailto:kgulshan230@outlook.com"
-                className="hover:text-blue-800 transition-transform duration-300 hover:scale-110"
-              >
-                <MdEmail className="text-2xl" />
-              </a>
-              <a
-                href="mailto:kgulshan230@outlook.com"
-                className="hover:underline hover:text-blue-800"
-              >
+              <MdEmail className="text-2xl" />
+              <span className="hover:underline hover:text-blue-600">
                 kgulshan230@outlook.com
-              </a>
+              </span>
             </div>
 
-            {/* LinkedIn */}
             <div className="flex items-center gap-2">
-              <a
-                href="https://www.linkedin.com/in/gulshan98/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-blue-800 transition-transform duration-300 hover:scale-110"
-              >
-                <FaLinkedin className="text-2xl" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/gulshan98/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:underline hover:text-blue-800"
-              >
+              <FaLinkedin className="text-2xl" />
+              <span className="hover:underline hover:text-blue-600">
                 LinkedIn Profile
-              </a>
+              </span>
             </div>
           </motion.div>
-
         </motion.div>
       </div>
+
+      {/* Scroll Down Indicator */}
+      {showScrollIndicator && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: [10, 0, 10] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+          className="absolute bottom-6 left-1/2 transform -translate-x-1/2"
+        >
+          <div className="text-blue-600 text-sm flex flex-col items-center pointer-events-none">
+            <span>Scroll Down</span>
+            <svg className="w-6 h-6 mt-1 animate-bounce" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </motion.div>
+      )}
     </section>
   );
 };
