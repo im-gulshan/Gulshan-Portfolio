@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt, FaLink } from "react-icons/fa";
+import { IoChevronDown } from "react-icons/io5";
 
 const projectList = [
   {
-    title: "Playwright Automation",
+    title: "Playwright Automation Framework",
     description: [
       "Automates API and UI interactions for login and order creation.",
       "Combines API responses with UI workflows for validation.",
@@ -15,7 +16,7 @@ const projectList = [
     icon: <FaGithub />,
   },
   {
-    title: "Selenium Automation",
+    title: "Selenium Automation Framework",
     description: [
       "Built framework using Selenium Java + Maven + TestNG.",
       "Implemented Page Object Model (POM) for maintainability.",
@@ -40,11 +41,7 @@ const Projects = () => {
   const [expandedIndex, setExpandedIndex] = useState(0);
 
   const toggleProject = (index) => {
-    if (expandedIndex === index) {
-      setExpandedIndex(null); // collapse if same project clicked
-    } else {
-      setExpandedIndex(index); // open new project
-    }
+    setExpandedIndex(expandedIndex === index ? null : index);
   };
 
   return (
@@ -54,83 +51,82 @@ const Projects = () => {
           Projects
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-1 gap-8">
-          {projectList.map((project, index) => (
-            <motion.div
-              key={index}
-              layout
-              initial={{ borderRadius: 10 }}
-              animate={{ borderRadius: 10 }}
-              className={`bg-gray-50 p-6 rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 ${
-                expandedIndex === index ? "border-l-4 border-blue-600 bg-blue-50" : ""
-              }`}
-            >
-              <div
-                className="flex justify-between items-center cursor-pointer"
-                onClick={() => toggleProject(index)}
+        <div className="space-y-4">
+          {projectList.map((project, index) => {
+            const isOpen = expandedIndex === index;
+            return (
+              <motion.div
+                key={index}
+                layout
+                transition={{ duration: 0.3 }}
+                className={`rounded-xl shadow-md border transition-all ${
+                  isOpen
+                    ? "bg-white border-blue-500"
+                    : "bg-white hover:bg-blue-50 border-gray-300"
+                }`}
               >
-                <div className="text-xl font-semibold text-gray-800">{project.title}</div>
-                <motion.div
-                  animate={{ rotate: expandedIndex === index ? 45 : 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="text-3xl text-blue-500"
+                <div
+                  className={`flex items-center justify-between ${
+                    isOpen ? "p-6" : "p-3"
+                  } cursor-pointer transition-all`}
+                  onClick={() => toggleProject(index)}
                 >
-                  +
-                </motion.div>
-              </div>
-
-              <AnimatePresence mode="wait">
-                {expandedIndex === index && (
-                  <motion.div
-                    key="content"
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.4 }}
-                    className="overflow-hidden mt-4"
-                  >
-                    <ul className="space-y-2 text-gray-700 pl-4">
-                      {project.description.map((point, idx) => (
-                        <motion.li
-                          key={idx}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.3, delay: idx * 0.1 }}
-                          whileHover={{ scale: 1.05, x: 5 }}
-                          className="flex items-start cursor-pointer"
-                        >
-                          <span className="mr-2 text-blue-400">➤</span>
-                          {point}
-                        </motion.li>
-                      ))}
-                    </ul>
-
-                    <div className="flex items-center mt-6">
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-600 hover:text-blue-800 font-medium flex items-center"
-                      >
-                        View Project
-                        <FaExternalLinkAlt className="ml-2" />
-                      </a>
-
-                      <motion.a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-gray-500 hover:text-gray-800 ml-4 text-2xl"
-                        whileHover={{ scale: 1.2 }}
-                      >
-                        {project.icon}
-                      </motion.a>
+                  <div className={`space-y-1 ${isOpen ? "text-base" : "text-sm"}`}>
+                    <div className="flex items-center text-blue-700 font-semibold space-x-2">
+                      {project.icon}
+                      <span>{project.title}</span>
                     </div>
+                  </div>
+
+                  <motion.div
+                    animate={{ rotate: isOpen ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="text-xl text-blue-500 transform"
+                  >
+                    <IoChevronDown />
                   </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          ))}
+                </div>
+
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      key="content"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.4 }}
+                      className="px-6 pb-6 pt-2 text-gray-700 overflow-hidden"
+                    >
+                      <ul className="list-disc list-inside space-y-2 max-h-60 overflow-y-auto">
+                        {project.description.map((point, idx) => (
+                          <motion.li
+                            key={idx}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.3, delay: idx * 0.05 }}
+                          >
+                            {point}
+                          </motion.li>
+                        ))}
+                      </ul>
+
+                      <div className="flex items-center mt-6">
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-600 hover:text-blue-800 font-medium flex items-center"
+                        >
+                          View Project
+                          <FaExternalLinkAlt className="ml-2" />
+                        </a>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

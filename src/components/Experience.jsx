@@ -1,28 +1,69 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { FaBuilding, FaCalendarAlt } from "react-icons/fa";
+import { IoChevronDown, IoChevronUp } from "react-icons/io5";
 
-const experiences = [
+const experienceList = [
   {
     role: "Engineer II, Quality Engineering",
     company: "S&P Global",
     duration: "Oct 2024 – Present",
-    description: "Working on automation testing, performance testing, and CI/CD integration using modern tools and frameworks.",
+    details: [
+      "Delivering exceptional software products with Agile methodologies using Selenium for Automation testing and robust quality maintenance.",
+      "Developed a detailed Master Test Plan (MTP) & User Acceptance Test (UAT) Plan aligned with client requirements, creating and executing positive and negative test cases for Android and Web applications for performance, automation, and manual testing.",
+      "Contributed in designing and developing the automation framework, including suites, packages and scripts, and skilled in end-to-end automation testing, test case creation, execution, and maintenance.",
+      "Reduced software execution time by 30% through automation testing compared to manual testing.",
+      "Increased concurrent user’s capacity from 50 to 500 of the platform by performance testing.",
+      "I utilized Locators, Explicit and Implicit Waits, Dynamic Path, Page Object Model (POM), Cross-browser Testing, Parallel Execution, and Test Data Management.",
+      "Configured JMeter in the system and given KT to QA team, created frameworks from scratch, proficient in end-to-end performance testing, by utilizing correlation, timers, samplers, post processor, listeners, etc., and did performance monitoring.",
+      "Experienced in developing and executing scripts in JMeter and analysed results for optimal performance.",
+      "Collaborated with concerned person to understand product functionality and performance needs. Conducted root cause analyses on test results and communicated performance, automation & manual testing KPIs to project lead.",
+      "Proficient in manual REST API testing with Postman, skilled in utilizing GET, PUT, POST, and DELETE methods.",
+      "Proficient in Java OOPs and other basic concepts of Java and used Azure DevOps Board and JIRA for bug tracking.",
+      "Experienced in performing a range of detailed testing types, including Functionality, UI, Adhoc, Black Box, Regression, Integration, Smoke, Sanity, Stress, Load, Endurance and Accessibility testing. Filling in gaps in test coverage, adding new scenarios, and building a stable environment."
+    ],
   },
   {
     role: "QA Engineer",
     company: "Tata Consultancy Services",
     duration: "Oct 2022 – Oct 2024",
-    description: "Performed manual and automation testing using Selenium, Java, Postman, and JMeter. Worked on Agile teams delivering quality software solutions.",
+    details: [
+      "Define procedures and standards about process knowledge in a best way to execute a task.",
+      "Define performance objective & determine acceptable performance level.",
+      "Lead a team of size of 10 members as a SME to execute a task in a best way.",
+      "Resolve associates issue within their area of expertise.",
+      "Led a high-performing team that consistently achieved over 98% accuracy in its operations.",
+      "The Tron Team is a part of Amazon Vision Operations Center (AVOC), which remotely handles stowing activities in the Fulfilment centers.",
+      "When a product is placed into a location, this activity is recorded and is sent to the Tron team for verification on the writing tool.",
+      "Working on Writing tool to provide Machine learning support to robots used in Amazon Robotics Fulfilment Centers.",
+      "Daily team huddle of previous day’s performance and weekly business review of the performance of team.",
+      "Maintenance of performance data on excel daily to predict metric at end of the month.",
+      "Worked on implementation of 3 pilot projects.",
+      "Responsible for taking team huddle and doubt clearance sessions with team for defect analysis."
+
+    ],
   },
   {
     role: "Tron SME",
     company: "Amazon",
     duration: "May 2019 – Sept 2022",
-    description: "I led a team as a Tron SME, defining procedures, setting performance objectives, and resolving associate issues to optimize task execution.",
+    details: [
+      "Defined procedures and standards for process excellence...",
+      "Led a high-performing team achieving over 98% accuracy...",
+      "Resolved associates' issues efficiently...",
+      "Provided machine learning support via Writing tool...",
+      "Managed performance data in Excel for predictions...",
+    ],
   },
 ];
 
 const Experience = () => {
+  const [expandedIndex, setExpandedIndex] = useState(0);
+
+  const toggleExperience = (index) => {
+    setExpandedIndex(expandedIndex === index ? null : index);
+  };
+
   return (
     <section id="experience" className="py-10 px-6 md:px-16 bg-white">
       <div className="container mx-auto max-w-screen-xl">
@@ -30,30 +71,80 @@ const Experience = () => {
           Experience
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-1 gap-8">
-          {experiences.map((exp, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105"
-            >
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center space-x-3 text-blue-600 font-semibold text-lg">
-                  <FaBuilding className="text-xl" />
-                  <span>{exp.company}</span>
+        <div className="space-y-4">
+          {experienceList.map((exp, index) => {
+            const isOpen = expandedIndex === index;
+            return (
+              <motion.div
+                key={index}
+                layout
+                transition={{ duration: 0.3 }}
+                className={`rounded-xl shadow-md border transition-all ${isOpen
+                    ? "bg-white border-blue-500"
+                    : "bg-white hover:bg-blue-50 border-gray-300"
+                  }`}
+              >
+                <div
+                  className={`flex items-center justify-between ${isOpen ? "p-6" : "p-3"
+                    } cursor-pointer transition-all`}
+                  onClick={() => toggleExperience(index)}
+                >
+                  <div className={`space-y-1 ${isOpen ? "text-base" : "text-sm"}`}>
+                    <div className="flex items-center text-blue-700 font-semibold space-x-2">
+                      <FaBuilding />
+                      <span>{exp.company}</span>
+                    </div>
+                    <div
+                      className={`font-bold text-gray-800 ${isOpen ? "text-xl" : "text-sm"
+                        }`}
+                    >
+                      {exp.role}
+                    </div>
+                    <div className="flex items-center text-gray-500">
+                      <FaCalendarAlt className="mr-1" />
+                      <span className={`${isOpen ? "text-sm" : "text-xs"}`}>
+                        {exp.duration}
+                      </span>
+                    </div>
+                  </div>
+
+                  <motion.div
+                    animate={{ rotate: isOpen ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="text-xl text-blue-500"
+                  >
+                    {isOpen ? <IoChevronUp /> : <IoChevronDown />}
+                  </motion.div>
                 </div>
-                <div className="flex items-center space-x-1 text-sm text-gray-500">
-                  <FaCalendarAlt className="text-lg" />
-                  <span>{exp.duration}</span>
-                </div>
-              </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">{exp.role}</h3>
-              <p className="text-gray-600 text-base">{exp.description}</p>
-            </motion.div>
-          ))}
+
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      key="content"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.4 }}
+                      className="px-6 pb-6 pt-2 text-gray-700 overflow-hidden"
+                    >
+                      <ul className="list-disc list-inside space-y-2 max-h-60 overflow-y-auto">
+                        {exp.details.map((point, idx) => (
+                          <motion.li
+                            key={`${index}-${idx}`}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.3, delay: idx * 0.05 }}
+                          >
+                            {point}
+                          </motion.li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
