@@ -1,13 +1,25 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaBuilding, FaCalendarAlt } from "react-icons/fa";
-import { IoChevronDown, IoChevronUp } from "react-icons/io5";
+import { IoChevronDown} from "react-icons/io5";
 
 const experienceList = [
   {
     role: "Engineer II, Quality Engineering",
     company: "S&P Global",
     duration: "Oct 2024 – Present",
+    details: [
+      "Developing an automation framework using Java, OOPs, Selenium, TestNG, and POM to reduce manual execution time from 1 month to 1.5 week, achieving a 70%-time savings.",
+      "Defining the testing scope for modules and writing test cases for critical and edge scenarios to ensure product quality.",
+      "Analyzing customized modules for multiple clients and providing timelines for testing completion.",
+      "Providing feedback to enhance user experience by identifying functionality improvements and discussing intuitive solutions directly with stakeholders.",
+      "Assisting juniors in script development, debugging, and guiding them on best practices for efficient automation."
+    ],
+  },
+  {
+    role: "Systems Engineer",
+    company: "Tata Consultancy Services",
+    duration: "Oct 2022 – Oct 2024",
     details: [
       "Delivering exceptional software products with Agile methodologies using Selenium for Automation testing and robust quality maintenance.",
       "Developed a detailed Master Test Plan (MTP) & User Acceptance Test (UAT) Plan aligned with client requirements, creating and executing positive and negative test cases for Android and Web applications for performance, automation, and manual testing.",
@@ -24,9 +36,9 @@ const experienceList = [
     ],
   },
   {
-    role: "QA Engineer",
-    company: "Tata Consultancy Services",
-    duration: "Oct 2022 – Oct 2024",
+    role: "Tron SME",
+    company: "Amazon",
+    duration: "May 2019 – Sept 2022",
     details: [
       "Define procedures and standards about process knowledge in a best way to execute a task.",
       "Define performance objective & determine acceptable performance level.",
@@ -40,19 +52,6 @@ const experienceList = [
       "Maintenance of performance data on excel daily to predict metric at end of the month.",
       "Worked on implementation of 3 pilot projects.",
       "Responsible for taking team huddle and doubt clearance sessions with team for defect analysis."
-
-    ],
-  },
-  {
-    role: "Tron SME",
-    company: "Amazon",
-    duration: "May 2019 – Sept 2022",
-    details: [
-      "Defined procedures and standards for process excellence...",
-      "Led a high-performing team achieving over 98% accuracy...",
-      "Resolved associates' issues efficiently...",
-      "Provided machine learning support via Writing tool...",
-      "Managed performance data in Excel for predictions...",
     ],
   },
 ];
@@ -113,7 +112,7 @@ const Experience = () => {
                     transition={{ duration: 0.3 }}
                     className="text-xl text-blue-500"
                   >
-                    {isOpen ? <IoChevronUp /> : <IoChevronDown />}
+                    <IoChevronDown />
                   </motion.div>
                 </div>
 
