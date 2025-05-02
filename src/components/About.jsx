@@ -10,7 +10,7 @@ const About = () => {
   useEffect(() => {
     const currentRef = aboutRef.current;
     const isMobile = window.innerWidth <= 768;
-  
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         setShowScrollIndicator(entry.isIntersecting);
@@ -19,11 +19,11 @@ const About = () => {
         threshold: isMobile ? 0.5 : 1.0,
       }
     );
-  
+
     if (currentRef) {
       observer.observe(currentRef);
     }
-  
+
     return () => {
       if (currentRef) {
         observer.unobserve(currentRef);
@@ -95,25 +95,24 @@ const About = () => {
               <span>LinkedIn Profile</span>
             </a>
           </motion.div>
+
+          {/* Mobile-only scroll down indicator below LinkedIn */}
+          {showScrollIndicator && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: [10, 0, 10] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              className="block sm:hidden mt-6 text-blue-600 text-sm flex flex-col items-center pointer-events-none"
+            >
+              <span>Scroll Down</span>
+              <svg className="w-6 h-6 mt-1 animate-bounce" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </motion.div>
+          )}
+          
         </motion.div>
       </div>
-
-      {/* Scroll Down Indicator */}
-      {showScrollIndicator && (
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: [10, 0, 10] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-          className="absolute bottom-6 left-1/2 transform -translate-x-1/2"
-        >
-          <div className="text-blue-600 text-sm flex flex-col items-center pointer-events-none">
-            <span>Scroll Down</span>
-            <svg className="w-6 h-6 mt-1 animate-bounce" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-            </svg>
-          </div>
-        </motion.div>
-      )}
     </section>
   );
 };
