@@ -60,13 +60,12 @@ const Experience = () => {
   const [expandedIndex, setExpandedIndex] = useState(0);
   const [hovered, setHovered] = useState(null);
 
-  // Custom Bullet Style
   const customBulletStyle = {
     width: "5px",
     height: "5px",
     backgroundColor: "#4A4A4A",
     borderRadius: "50%",
-    marginTop: "0.6rem", // Adjust margin if needed
+    marginTop: "0.6rem",
   };
 
   const toggleExperience = (index) => {
@@ -74,9 +73,9 @@ const Experience = () => {
   };
 
   return (
-    <section id="experience" className="py-10 px-6 md:px-16 bg-white">
+    <section id="experience" className="py-10 px-4 sm:px-6 md:px-16 bg-white">
       <div className="container mx-auto max-w-screen-xl">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-10 border-b-2 pb-2 border-blue-500">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-800 mb-8 sm:mb-10 border-b-2 pb-2 border-blue-500">
           Experience
         </h2>
 
@@ -88,14 +87,14 @@ const Experience = () => {
                 key={index}
                 layout
                 transition={{ duration: 0.3 }}
-                className={`rounded-xl shadow-md border transition-all ${isOpen
-                  ? "bg-white border-blue-500"
-                  : "bg-white hover:bg-blue-50 border-gray-300"
-                  }`}
+                className={`rounded-xl shadow-md border transition-all ${
+                  isOpen ? "bg-white border-blue-500" : "bg-white hover:bg-blue-50 border-gray-300"
+                }`}
               >
                 <div
-                  className={`flex items-center justify-between ${isOpen ? "p-6" : "p-3"
-                    } cursor-pointer transition-all`}
+                  className={`flex flex-col sm:flex-row sm:items-center justify-between ${
+                    isOpen ? "p-5 sm:p-6" : "p-3"
+                  } cursor-pointer transition-all`}
                   onClick={() => toggleExperience(index)}
                   onMouseEnter={() => setHovered(exp.role)}
                   onMouseLeave={() => setHovered(null)}
@@ -112,23 +111,21 @@ const Experience = () => {
                       <span>{exp.company}</span>
                     </div>
                     <div
-                      className={`font-bold text-gray-800 ${isOpen ? "text-xl" : "text-sm"
+                      className={`font-bold text-gray-800 ${isOpen ? "text-lg sm:text-xl" : "text-sm"
                         }`}
                     >
                       {exp.role}
                     </div>
-                    <div className="flex items-center text-gray-500">
+                    <div className="flex items-center text-gray-500 text-sm">
                       <FaCalendarAlt className="mr-1" />
-                      <span className={`${isOpen ? "text-sm" : "text-xs"}`}>
-                        {exp.duration}
-                      </span>
+                      <span>{exp.duration}</span>
                     </div>
                   </div>
 
                   <motion.div
                     animate={{ rotate: isOpen ? 180 : 0 }}
                     transition={{ duration: 0.3 }}
-                    className="text-xl text-blue-500"
+                    className="mt-2 sm:mt-0 text-xl text-blue-500"
                   >
                     <IoChevronDown />
                   </motion.div>
@@ -142,22 +139,20 @@ const Experience = () => {
                       animate={{ opacity: 1, height: "auto" }}
                       exit={{ opacity: 0, height: 0 }}
                       transition={{ duration: 0.4 }}
-                      className="px-6 pb-6 pt-2 text-gray-700 overflow-hidden"
+                      className="px-4 sm:px-6 pb-4 sm:pb-6 pt-2 text-gray-700 overflow-hidden"
                     >
-                      <ul className="list-none pl-0 ml-0 space-y-2 max-h-60 overflow-y-auto">
+                      <ul className="list-none pl-0 ml-0 space-y-2 max-h-80 sm:max-h-60 overflow-y-auto pr-2">
                         {exp.details.map((point, idx) => (
                           <motion.li
                             key={`${index}-${idx}`}
                             initial={{ opacity: 0, x: -10 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.3, delay: idx * 0.05 }}
-                            className="flex items-start space-x-2"
+                            className="flex items-start space-x-2 text-sm sm:text-base"
                           >
-                            {/* Bullet Point */}
                             <div className="flex-shrink-0">
                               <div style={customBulletStyle}></div>
                             </div>
-                            {/* Text */}
                             <div className="flex-1 break-words">
                               {point}
                             </div>
