@@ -9,20 +9,21 @@ const About = () => {
 
   useEffect(() => {
     const currentRef = aboutRef.current;
-
+    const isMobile = window.innerWidth <= 768;
+  
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setShowScrollIndicator(entry.isIntersecting && entry.intersectionRatio === 1);
+        setShowScrollIndicator(entry.isIntersecting);
       },
       {
-        threshold: 1.0,
+        threshold: isMobile ? 0.5 : 1.0,
       }
     );
-
+  
     if (currentRef) {
       observer.observe(currentRef);
     }
-
+  
     return () => {
       if (currentRef) {
         observer.unobserve(currentRef);
