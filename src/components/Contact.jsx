@@ -18,34 +18,36 @@ const Contact = () => (
         Feel free to reach out via email or connect with me on LinkedIn.
       </p>
 
-      <div className="space-y-3">
+      <div className="space-y-3 sm:space-y-4">
+        {/* Email section */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="flex items-center justify-center gap-4 text-blue-600 text-lg"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 text-blue-600 text-lg"
         >
           <a
-            href="mailto:kgulshan230@outlook.com"
+            href="mailto:kgulshan230@gmail.com"
             className="hover:text-blue-800 transition-transform duration-300 hover:scale-110"
           >
-            <MdEmail className="text-3xl" />
+            <MdEmail className="text-3xl sm:text-4xl" />
           </a>
           <a
-            href="mailto:kgulshan230@outlook.com"
+            href="mailto:kgulshan230@gmail.com"
             className="hover:underline hover:text-blue-800"
           >
-            kgulshan230@outlook.com
+            kgulshan230@gmail.com
           </a>
         </motion.div>
 
+        {/* LinkedIn section */}
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           viewport={{ once: true }}
-          className="flex items-center justify-center gap-4 text-blue-600 text-lg"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 text-blue-600 text-lg"
         >
           <a
             href="https://www.linkedin.com/in/gulshan98/"
@@ -53,7 +55,7 @@ const Contact = () => (
             rel="noopener noreferrer"
             className="hover:text-blue-800 transition-transform duration-300 hover:scale-110"
           >
-            <FaLinkedin className="text-3xl" />
+            <FaLinkedin className="text-3xl sm:text-4xl" />
           </a>
           <a
             href="https://www.linkedin.com/in/gulshan98/"

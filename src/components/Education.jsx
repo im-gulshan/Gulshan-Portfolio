@@ -34,7 +34,7 @@ const EducationSelector = ({
 }) => (
   <>
     {/* Mobile Dropdown */}
-    <div className="md:hidden">
+    <div className="md:hidden mb-2">
       <label htmlFor="education-select" className="block text-sm font-medium text-gray-700 mb-1">
         Select Education
       </label>
@@ -80,7 +80,7 @@ const EducationSelector = ({
           >
             {item.icon}
           </motion.span>
-          <span className="text-lg">{item.title}</span>
+          <span className="text-base">{item.title}</span>
         </motion.button>
       ))}
     </div>
@@ -95,11 +95,11 @@ const EducationCard = ({ data }) => (
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
     transition={{ duration: 0.4 }}
-    className="bg-gray-50 p-8 rounded-xl shadow-md"
+    className="bg-gray-50 p-6 md:p-8 rounded-xl shadow-md"
   >
-    <div className="flex items-center mb-6">
-      <span className="text-blue-600 text-3xl mr-3">{data.icon}</span>
-      <h3 className="text-2xl font-semibold text-gray-800">{data.title}</h3>
+    <div className="flex items-center mb-4 md:mb-6">
+      <span className="text-blue-600 text-2xl md:text-3xl mr-3">{data.icon}</span>
+      <h3 className="text-xl md:text-2xl font-semibold text-gray-800">{data.title}</h3>
     </div>
     {data.degree && (
       <p className="text-gray-600 font-medium text-lg mb-1">{data.degree}</p>
@@ -117,15 +117,15 @@ const Education = () => {
   const renderedCard = useMemo(() => <EducationCard data={selected} />, [selected]);
 
   return (
-    <section id="education" className="py-10 px-6 md:px-16 bg-white">
+    <section id="education" className="py-10 px-4 sm:px-6 md:px-16 bg-white">
       <div className="container mx-auto max-w-screen-xl">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-10 border-b-2 pb-2 border-blue-500">
+        <h2 className="text-3xl md:text-5xl font-extrabold text-gray-800 mb-8 md:mb-10 border-b-2 pb-2 border-blue-500">
           Education
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Selector (Left) */}
-          <div className="flex flex-col space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          {/* Left - Selector */}
+          <div>
             <EducationSelector
               selected={selected}
               setSelected={setSelected}
@@ -134,8 +134,8 @@ const Education = () => {
             />
           </div>
 
-          {/* Details (Right) */}
-          <div className="col-span-2">
+          {/* Right - Details */}
+          <div className="md:col-span-2">
             <AnimatePresence mode="wait">{renderedCard}</AnimatePresence>
           </div>
         </div>

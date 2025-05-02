@@ -30,7 +30,7 @@ const ScrollToTopButton = () => {
   return (
     <motion.button
       onClick={scrollToTop}
-      className={`fixed bottom-6 right-6 p-3 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 transition-opacity duration-500 z-50 ${
+      className={`fixed bottom-4 sm:bottom-6 right-4 sm:right-6 p-3 sm:p-4 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 transition-opacity duration-500 z-50 ${
         isVisible ? "opacity-100" : "opacity-0"
       }`}
       aria-label="Scroll to top"
@@ -39,7 +39,7 @@ const ScrollToTopButton = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <FaArrowUp className="text-xl" />
+      <FaArrowUp className="text-lg sm:text-xl" />
     </motion.button>
   );
 };

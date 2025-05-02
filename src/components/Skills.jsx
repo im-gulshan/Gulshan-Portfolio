@@ -35,7 +35,7 @@ const skillCategories = [
 const CategorySelector = ({ selectedCategory, setSelectedCategory, hoveredCategory, setHoveredCategory }) => (
   <>
     {/* Mobile Dropdown */}
-    <div className="md:hidden">
+    <div className="md:hidden mb-2">
       <label htmlFor="category-select" className="block text-sm font-medium text-gray-700 mb-1">
         Select Category
       </label>
@@ -81,14 +81,13 @@ const CategorySelector = ({ selectedCategory, setSelectedCategory, hoveredCatego
           >
             {category.icon}
           </motion.span>
-          <span className="text-lg">{category.title}</span>
+          <span className="text-base">{category.title}</span>
         </motion.button>
       ))}
     </div>
   </>
 );
 
-// Selected category detail card
 const SkillCategoryCard = ({ category }) => (
   <motion.div
     key={category.title}
@@ -96,14 +95,14 @@ const SkillCategoryCard = ({ category }) => (
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
     transition={{ duration: 0.4 }}
-    className="bg-gray-50 p-8 rounded-xl shadow-md"
+    className="bg-gray-50 p-6 md:p-8 rounded-xl shadow-md"
   >
-    <div className="flex items-center mb-6">
-      <span className="text-blue-600 text-3xl mr-3">{category.icon}</span>
-      <h3 className="text-2xl font-semibold text-gray-800">{category.title}</h3>
+    <div className="flex items-center mb-4 md:mb-6">
+      <span className="text-blue-600 text-2xl md:text-3xl mr-3">{category.icon}</span>
+      <h3 className="text-xl md:text-2xl font-semibold text-gray-800">{category.title}</h3>
     </div>
     <motion.ul
-      className="list-disc list-outside grid grid-cols-1 sm:grid-cols-2 gap-4 pl-5 text-gray-700"
+      className="list-disc list-outside grid grid-cols-1 sm:grid-cols-2 gap-4 pl-5 text-gray-700 text-sm md:text-base"
       initial="hidden"
       animate="visible"
       variants={{
@@ -113,11 +112,11 @@ const SkillCategoryCard = ({ category }) => (
     >
       {category.items.map((item, idx) => (
         <motion.li
-        key={idx}
-        variants={{ visible: { opacity: 1, y: 0 }, hidden: { opacity: 0, y: 10 } }}
-        transition={{ duration: 0.2 }}
-        whileHover={{ scale: 1.03 }}
-        className="hover:text-blue-700 transition-transform duration-200 ease-in-out cursor-default"
+          key={idx}
+          variants={{ visible: { opacity: 1, y: 0 }, hidden: { opacity: 0, y: 10 } }}
+          transition={{ duration: 0.2 }}
+          whileHover={{ scale: 1.03 }}
+          className="hover:text-blue-700 transition-transform duration-200 ease-in-out cursor-default"
         >
           {item}
         </motion.li>
@@ -126,7 +125,6 @@ const SkillCategoryCard = ({ category }) => (
   </motion.div>
 );
 
-// Main Skills component
 const Skills = () => {
   const [selectedCategory, setSelectedCategory] = useState(skillCategories[0]);
   const [hoveredCategory, setHoveredCategory] = useState(null);
@@ -134,15 +132,15 @@ const Skills = () => {
   const renderedCard = useMemo(() => <SkillCategoryCard category={selectedCategory} />, [selectedCategory]);
 
   return (
-    <section id="skills" className="py-10 px-6 md:px-16 bg-white">
+    <section id="skills" className="py-10 px-4 sm:px-6 md:px-16 bg-white">
       <div className="container mx-auto max-w-screen-xl">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-10 border-b-2 pb-2 border-blue-500">
+        <h2 className="text-3xl md:text-5xl font-extrabold text-gray-800 mb-8 md:mb-10 border-b-2 pb-2 border-blue-500">
           Skills
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {/* Left - Selector */}
-          <div className="flex flex-col space-y-4">
+          <div>
             <CategorySelector
               selectedCategory={selectedCategory}
               setSelectedCategory={setSelectedCategory}
@@ -152,7 +150,7 @@ const Skills = () => {
           </div>
 
           {/* Right - Details */}
-          <div className="col-span-2">
+          <div className="md:col-span-2">
             <AnimatePresence mode="wait">{renderedCard}</AnimatePresence>
           </div>
         </div>
