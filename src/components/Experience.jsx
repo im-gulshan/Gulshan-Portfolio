@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaBuilding, FaCalendarAlt } from "react-icons/fa";
-import { IoChevronDown} from "react-icons/io5";
+import { IoChevronDown } from "react-icons/io5";
 
 const experienceList = [
   {
@@ -58,6 +58,16 @@ const experienceList = [
 
 const Experience = () => {
   const [expandedIndex, setExpandedIndex] = useState(0);
+  const [hovered, setHovered] = useState(null);
+
+  // Custom Bullet Style
+  const customBulletStyle = {
+    width: "5px",
+    height: "5px",
+    backgroundColor: "#4A4A4A",
+    borderRadius: "50%",
+    marginTop: "0.6rem", // Adjust margin if needed
+  };
 
   const toggleExperience = (index) => {
     setExpandedIndex(expandedIndex === index ? null : index);
@@ -79,18 +89,26 @@ const Experience = () => {
                 layout
                 transition={{ duration: 0.3 }}
                 className={`rounded-xl shadow-md border transition-all ${isOpen
-                    ? "bg-white border-blue-500"
-                    : "bg-white hover:bg-blue-50 border-gray-300"
+                  ? "bg-white border-blue-500"
+                  : "bg-white hover:bg-blue-50 border-gray-300"
                   }`}
               >
                 <div
                   className={`flex items-center justify-between ${isOpen ? "p-6" : "p-3"
                     } cursor-pointer transition-all`}
                   onClick={() => toggleExperience(index)}
+                  onMouseEnter={() => setHovered(exp.role)}
+                  onMouseLeave={() => setHovered(null)}
                 >
                   <div className={`space-y-1 ${isOpen ? "text-base" : "text-sm"}`}>
                     <div className="flex items-center text-blue-700 font-semibold space-x-2">
-                      <FaBuilding />
+                      <motion.span
+                        className="text-xl"
+                        animate={{ rotate: hovered === exp.role ? 15 : 0 }}
+                        transition={{ type: "spring", stiffness: 300 }}
+                      >
+                        <FaBuilding />
+                      </motion.span>
                       <span>{exp.company}</span>
                     </div>
                     <div
@@ -126,15 +144,23 @@ const Experience = () => {
                       transition={{ duration: 0.4 }}
                       className="px-6 pb-6 pt-2 text-gray-700 overflow-hidden"
                     >
-                      <ul className="list-disc list-inside space-y-2 max-h-60 overflow-y-auto">
+                      <ul className="list-none pl-0 ml-0 space-y-2 max-h-60 overflow-y-auto">
                         {exp.details.map((point, idx) => (
                           <motion.li
                             key={`${index}-${idx}`}
                             initial={{ opacity: 0, x: -10 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.3, delay: idx * 0.05 }}
+                            className="flex items-start space-x-2"
                           >
-                            {point}
+                            {/* Bullet Point */}
+                            <div className="flex-shrink-0">
+                              <div style={customBulletStyle}></div>
+                            </div>
+                            {/* Text */}
+                            <div className="flex-1 break-words">
+                              {point}
+                            </div>
                           </motion.li>
                         ))}
                       </ul>

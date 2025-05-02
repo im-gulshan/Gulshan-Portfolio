@@ -42,14 +42,30 @@ const Header = () => {
               className="cursor-pointer"
             >
               <a
-                href="#projects"
+                href="#experience"
                 onClick={(e) => {
                   e.preventDefault(); // Prevent default anchor behavior
-                  handleScroll('projects');
+                  handleScroll('experience');
                 }}
                 className="hover:text-gray-300 transition duration-300"
               >
-                Projects
+                Experience
+              </a>
+            </motion.li>
+            <motion.li
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="cursor-pointer"
+            >
+              <a
+                href="#skills"
+                onClick={(e) => {
+                  e.preventDefault(); // Prevent default anchor behavior
+                  handleScroll('skills');
+                }}
+                className="hover:text-gray-300 transition duration-300"
+              >
+                Skills
               </a>
             </motion.li>
             <motion.li
