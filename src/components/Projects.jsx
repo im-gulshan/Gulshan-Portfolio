@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaGithub, FaExternalLinkAlt} from "react-icons/fa";
+import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import { IoChevronDown } from "react-icons/io5";
 
 const projectList = [
@@ -69,8 +69,8 @@ const Projects = () => {
                 layout
                 transition={{ duration: 0.3 }}
                 className={`rounded-xl shadow-md border transition-all ${isOpen
-                    ? "bg-white border-blue-500"
-                    : "bg-white hover:bg-blue-50 border-gray-300"
+                  ? "bg-white border-blue-500"
+                  : "bg-white hover:bg-blue-50 border-gray-300"
                   }`}
               >
                 <div
@@ -80,25 +80,25 @@ const Projects = () => {
                   onMouseLeave={() => setHovered(null)}
                 >
                   <div className={`space-y-1 ${isOpen ? "text-base" : "text-sm"}`}>
-    <div className="flex items-center text-blue-700 font-semibold space-x-2">
-      <motion.span
-        className="text-xl"
-        animate={{ rotate: hovered === project.title ? 15 : 0 }}
-        transition={{ type: "spring", stiffness: 300 }}
-      >
-        {project.icon}
-      </motion.span>
-      <span>{project.title}</span>
-    </div>
-  </div>
+                    <div className="flex items-center text-blue-700 font-semibold space-x-2">
+                      <motion.span
+                        className="text-xl"
+                        animate={{ rotate: hovered === project.title ? 15 : 0 }}
+                        transition={{ type: "spring", stiffness: 300 }}
+                      >
+                        {project.icon}
+                      </motion.span>
+                      <span>{project.title}</span>
+                    </div>
+                  </div>
 
-  <motion.div
-    animate={{ rotate: isOpen ? 180 : 0 }}
-    transition={{ duration: 0.3 }}
-    className="text-xl text-blue-500 transform"
-  >
-    <IoChevronDown />
-  </motion.div>
+                  <motion.div
+                    animate={{ rotate: isOpen ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="text-xl text-blue-500 transform"
+                  >
+                    <IoChevronDown />
+                  </motion.div>
                 </div>
 
                 <AnimatePresence>

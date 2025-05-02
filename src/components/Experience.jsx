@@ -92,7 +92,7 @@ const Experience = () => {
                 }`}
               >
                 <div
-                  className={`flex flex-col sm:flex-row sm:items-center justify-between ${
+                  className={`flex items-center justify-between flex-wrap ${
                     isOpen ? "p-5 sm:p-6" : "p-3"
                   } cursor-pointer transition-all`}
                   onClick={() => toggleExperience(index)}
