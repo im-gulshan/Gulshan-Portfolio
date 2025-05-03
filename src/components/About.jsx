@@ -97,7 +97,7 @@ const About = () => {
           </motion.div>
 
           {/* Mobile-only scroll down indicator below LinkedIn */}
-          {showScrollIndicator && (
+          {showScrollIndicator && window.innerWidth <= 768 &&(
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: [10, 0, 10] }}
@@ -110,7 +110,23 @@ const About = () => {
               </svg>
             </motion.div>
           )}
-          
+
+          {/* Scroll Down Indicator for Web Only */}
+          {showScrollIndicator && window.innerWidth > 768 && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: [10, 0, 10] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              className="absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-6 text-blue-600 text-sm pointer-events-none flex flex-col items-center space-y-2"
+              style={{ transform: 'translateX(-10%)' }} // Move it to the left
+            >
+              <span>Scroll Down</span>
+              <svg className="w-6 h-6 mt-1 animate-bounce" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </motion.div>
+          )}
+
         </motion.div>
       </div>
     </section>
