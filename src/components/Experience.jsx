@@ -9,10 +9,10 @@ const experienceList = [
     company: "S&P Global",
     duration: "Oct 2024 – Present",
     details: [
-      "Developing an automation framework using Java, OOPs, Selenium, TestNG, and POM to reduce manual execution time from 1 month to 1.5 week, achieving a 70%-time savings.",
-      "Defining the testing scope for modules and writing test cases for critical and edge scenarios to ensure product quality.",
-      "Analyzing customized modules for multiple clients and providing timelines for testing completion.",
-      "Providing feedback to enhance user experience by identifying functionality improvements and discussing intuitive solutions directly with stakeholders.",
+      "Currently working with Playwright and TypeScript to automate test cases for web applications, reducing manual testing time from 1 month to just 1.5 weeks (70%-time savings).",
+      "Developed an automation framework using Java, OOPs, Selenium, TestNG, and POM to reduce manual execution time",
+      "Wrote test cases for critical and edge scenarios to make sure the product worked well.",
+      "Suggested improvements to make the product more user-friendly and discussed ideas.",
       "Assisting juniors in script development, debugging, and guiding them on best practices for efficient automation."
     ],
   },
