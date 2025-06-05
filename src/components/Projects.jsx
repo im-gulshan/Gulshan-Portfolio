@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
-import { IoChevronDown } from "react-icons/io5";
+// import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+// import { IoChevronDown } from "react-icons/io5";
+import { Github, ExternalLink, ChevronDown } from "lucide-react";
 
 const projectList = [
   {
@@ -13,7 +14,7 @@ const projectList = [
       "Reusable scripts for setting authentication tokens.",
     ],
     link: "https://github.com/im-gulshan/PlaywrightAutomation",
-    icon: <FaGithub />,
+    icon: <Github />,
   },
   {
     title: "Selenium Automation Framework",
@@ -23,7 +24,7 @@ const projectList = [
       "Supports scalable and cross-browser testing.",
     ],
     link: "https://github.com/im-gulshan/TestGenie",
-    icon: <FaGithub />,
+    icon: <Github />,
   },
   {
     title: "Personal Portfolio Website",
@@ -33,7 +34,7 @@ const projectList = [
       "Deployed on GitHub Pages with optimized performance.",
     ],
     link: "https://github.com/im-gulshan/Gulshan-Portfolio",
-    icon: <FaGithub />,
+    icon: <Github />,
   },
 ];
 
@@ -53,10 +54,49 @@ const Projects = () => {
     marginTop: "0.6rem",
   };
 
+  // Prevent context menu (right-click)
+  const handleContextMenu = (e) => {
+    e.preventDefault();
+  };
+
+  // Function to disable text selection
+  const handleSelectStart = (e) => {
+    e.preventDefault();
+  };
+
+  // Function to disable drag
+  const handleDragStart = (e) => {
+    e.preventDefault();
+  };
+
+  // Function to disable keyboard shortcuts
+  const handleKeyDown = (e) => {
+    // Disable Ctrl+A (Select All), Ctrl+C (Copy), Ctrl+V (Paste), F12 (DevTools)
+    if (e.ctrlKey && (e.key === 'a' || e.key === 'c' || e.key === 'v')) {
+      e.preventDefault();
+    }
+    if (e.key === 'F12') {
+      e.preventDefault();
+    }
+  };
+
   return (
-    <section id="projects" className="py-10 px-4 sm:px-6 md:px-16 bg-white">
+    <section 
+      id="projects" 
+      className="py-10 px-4 sm:px-6 md:px-16 bg-white select-none"
+      onContextMenu={handleContextMenu}
+      onSelectStart={handleSelectStart}
+      onDragStart={handleDragStart}
+      onKeyDown={handleKeyDown}
+      style={{ 
+        userSelect: 'none',
+        WebkitUserSelect: 'none',
+        MozUserSelect: 'none',
+        msUserSelect: 'none'
+      }}
+    >
       <div className="container mx-auto max-w-screen-xl">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-800 mb-8 sm:mb-10 border-b-2 pb-2 border-blue-500">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-800 mb-8 sm:mb-4 pb-2 border-blue-500">
           Projects
         </h2>
 
@@ -97,7 +137,7 @@ const Projects = () => {
                     transition={{ duration: 0.3 }}
                     className="text-xl text-blue-500 transform"
                   >
-                    <IoChevronDown />
+                    <ChevronDown />
                   </motion.div>
                 </div>
 
@@ -138,7 +178,7 @@ const Projects = () => {
                           className="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center"
                         >
                           View Project
-                          <FaExternalLinkAlt className="ml-2" />
+                          <ExternalLink className="ml-2" />
                         </a>
                       </div>
                     </motion.div>

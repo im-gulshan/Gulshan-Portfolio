@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaBuilding, FaCalendarAlt } from "react-icons/fa";
-import { IoChevronDown } from "react-icons/io5";
+// import { FaBuilding, FaCalendarAlt } from "react-icons/fa";
+// import { IoChevronDown } from "react-icons/io5";
+import { Building2, CalendarDays, ChevronDown } from "lucide-react";
 
 const experienceList = [
   {
@@ -25,7 +26,7 @@ const experienceList = [
       "Developed a detailed Master Test Plan (MTP) & User Acceptance Test (UAT) Plan aligned with client requirements, creating and executing positive and negative test cases for Android and Web applications for performance, automation, and manual testing.",
       "Contributed in designing and developing the automation framework, including suites, packages and scripts, and skilled in end-to-end automation testing, test case creation, execution, and maintenance.",
       "Reduced software execution time by 30% through automation testing compared to manual testing.",
-      "Increased concurrent user’s capacity from 50 to 500 of the platform by performance testing.",
+      "Increased concurrent user's capacity from 50 to 500 of the platform by performance testing.",
       "I utilized Locators, Explicit and Implicit Waits, Dynamic Path, Page Object Model (POM), Cross-browser Testing, Parallel Execution, and Test Data Management.",
       "Configured JMeter in the system and given KT to QA team, created frameworks from scratch, proficient in end-to-end performance testing, by utilizing correlation, timers, samplers, post processor, listeners, etc., and did performance monitoring.",
       "Experienced in developing and executing scripts in JMeter and analysed results for optimal performance.",
@@ -48,7 +49,7 @@ const experienceList = [
       "The Tron Team is a part of Amazon Vision Operations Center (AVOC), which remotely handles stowing activities in the Fulfilment centers.",
       "When a product is placed into a location, this activity is recorded and is sent to the Tron team for verification on the writing tool.",
       "Working on Writing tool to provide Machine learning support to robots used in Amazon Robotics Fulfilment Centers.",
-      "Daily team huddle of previous day’s performance and weekly business review of the performance of team.",
+      "Daily team huddle of previous day's performance and weekly business review of the performance of team.",
       "Maintenance of performance data on excel daily to predict metric at end of the month.",
       "Worked on implementation of 3 pilot projects.",
       "Responsible for taking team huddle and doubt clearance sessions with team for defect analysis."
@@ -72,10 +73,52 @@ const Experience = () => {
     setExpandedIndex(expandedIndex === index ? null : index);
   };
 
+  // Function to disable context menu
+  const handleContextMenu = (e) => {
+    e.preventDefault();
+  };
+
+  // Function to disable text selection
+  const handleSelectStart = (e) => {
+    e.preventDefault();
+  };
+
+  // Function to disable drag
+  const handleDragStart = (e) => {
+    e.preventDefault();
+  };
+
+  // Function to disable keyboard shortcuts
+  const handleKeyDown = (e) => {
+    // Disable Ctrl+A (Select All), Ctrl+C (Copy), Ctrl+V (Paste), F12 (DevTools)
+    if (e.ctrlKey && (e.key === 'a' || e.key === 'c' || e.key === 'v')) {
+      e.preventDefault();
+    }
+    if (e.key === 'F12') {
+      e.preventDefault();
+    }
+  };
+
   return (
-    <section id="experience" className="py-10 px-4 sm:px-6 md:px-16 bg-white">
+    <section 
+      id="experience" 
+      className="py-10 px-4 sm:px-6 md:px-16 bg-white select-none"
+      onContextMenu={handleContextMenu}
+      onSelectStart={handleSelectStart}
+      onDragStart={handleDragStart}
+      onKeyDown={handleKeyDown}
+      style={{ 
+        userSelect: 'none',
+        webkitUserSelect: 'none',
+        mozUserSelect: 'none',
+        msUserSelect: 'none',
+        webkitTouchCallout: 'none',
+        webkitUserDrag: 'none',
+        khtmlUserSelect: 'none'
+      }}
+    >
       <div className="container mx-auto max-w-screen-xl">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-800 mb-8 sm:mb-10 border-b-2 pb-2 border-blue-500">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-800 mb-8 sm:mb-4  pb-2 border-blue-500">
           Experience
         </h2>
 
@@ -103,10 +146,10 @@ const Experience = () => {
                     <div className="flex items-center text-blue-700 font-semibold space-x-2">
                       <motion.span
                         className="text-xl"
-                        animate={{ rotate: hovered === exp.role ? 15 : 0 }}
+                        animate={{ rotate: hovered === exp.role ? 0 : 0 }}
                         transition={{ type: "spring", stiffness: 300 }}
                       >
-                        <FaBuilding />
+                        <Building2 />
                       </motion.span>
                       <span>{exp.company}</span>
                     </div>
@@ -117,7 +160,7 @@ const Experience = () => {
                       {exp.role}
                     </div>
                     <div className="flex items-center text-gray-500 text-sm">
-                      <FaCalendarAlt className="mr-1" />
+                      <CalendarDays className="mr-1" />
                       <span>{exp.duration}</span>
                     </div>
                   </div>
@@ -127,7 +170,7 @@ const Experience = () => {
                     transition={{ duration: 0.3 }}
                     className="mt-2 sm:mt-0 text-xl text-blue-500"
                   >
-                    <IoChevronDown />
+                    <ChevronDown />
                   </motion.div>
                 </div>
 
