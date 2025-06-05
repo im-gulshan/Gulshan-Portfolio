@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { MdEmail } from "react-icons/md";
-import { FaLinkedin } from "react-icons/fa";
+import { Mail, Linkedin } from "lucide-react";
 
 const About = () => {
   const aboutRef = useRef(null);
@@ -31,11 +30,50 @@ const About = () => {
     };
   }, []);
 
+  // Function to disable context menu
+  const handleContextMenu = (e) => {
+    e.preventDefault();
+  };
+
+  // Function to disable text selection
+  const handleSelectStart = (e) => {
+    e.preventDefault();
+  };
+
+  // Function to disable drag
+  const handleDragStart = (e) => {
+    e.preventDefault();
+  };
+
+  // Function to disable keyboard shortcuts
+  const handleKeyDown = (e) => {
+    // Disable Ctrl+A (Select All), Ctrl+C (Copy), Ctrl+V (Paste), F12 (DevTools)
+    if (e.ctrlKey && (e.key === 'a' || e.key === 'c' || e.key === 'v')) {
+      e.preventDefault();
+    }
+    if (e.key === 'F12') {
+      e.preventDefault();
+    }
+  };
+
   return (
     <section
       id="about"
       ref={aboutRef}
-      className="relative min-h-screen flex items-center px-4 sm:px-6 md:px-20 py-20 bg-white"
+      className="relative min-h-screen flex items-center px-4 sm:px-6 md:px-20 py-20 bg-white select-none"
+      onContextMenu={handleContextMenu}
+      onSelectStart={handleSelectStart}
+      onDragStart={handleDragStart}
+      onKeyDown={handleKeyDown}
+      style={{ 
+        userSelect: 'none',
+        webkitUserSelect: 'none',
+        mozUserSelect: 'none',
+        msUserSelect: 'none',
+        webkitTouchCallout: 'none',
+        webkitUserDrag: 'none',
+        khtmlUserSelect: 'none'
+      }}
     >
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-center gap-10 text-center md:text-left">
 
@@ -45,12 +83,13 @@ const About = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-blue-500 shadow-xl transform transition duration-300 hover:scale-105 hover:shadow-2xl"
+          className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-blue-500 shadow-xl transform transition duration-300 hover:scale-105 hover:shadow-2xl"
         >
           <img
             src={`${process.env.PUBLIC_URL}/gulshan-kumar.jpg`}
             alt="Gulshan Kumar Profile"
             className="w-full h-full object-cover"
+            onDragStart={handleDragStart}
           />
         </motion.div>
 
@@ -62,11 +101,8 @@ const About = () => {
           viewport={{ once: true }}
           className="max-w-2xl px-2"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-800 mb-4 sm:mb-6 tracking-tight">
-            About Me
-          </h2>
           <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-            Hello! I'm <strong className="text-blue-600">Gulshan Kumar</strong>, a QA Engineer-II at <strong className="text-blue-600">S&amp;P Global</strong> with 6+ years of experience in Automation, Performance, API, and Manual Testing. Passionate about ensuring software quality, collaborating with teams, and always learning new technologies.
+            Hello! I'm <strong className="text-blue-600">Gulshan Kumar</strong>, a QA Engineer-II at <strong className="text-blue-600">S&P Global</strong> with 6+ years of experience in Automation, Performance, API, and Manual Testing. Passionate about ensuring software quality, collaborating with teams, and always learning new technologies.
           </p>
 
           {/* Email and LinkedIn */}
@@ -81,7 +117,7 @@ const About = () => {
               href="mailto:kgulshan230@gmail.com"
               className="flex items-center gap-2 hover:underline hover:text-blue-600"
             >
-              <MdEmail className="text-xl sm:text-2xl" />
+              <Mail className="text-xl sm:text-2xl" />
               <span>kgulshan230@gmail.com</span>
             </a>
 
@@ -91,7 +127,7 @@ const About = () => {
               rel="noopener noreferrer"
               className="flex items-center gap-2 hover:underline hover:text-blue-600"
             >
-              <FaLinkedin className="text-xl sm:text-2xl" />
+              <Linkedin className="text-xl sm:text-2xl" />
               <span>LinkedIn Profile</span>
             </a>
           </motion.div>

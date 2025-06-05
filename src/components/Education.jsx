@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaGraduationCap, FaUniversity, FaBookOpen } from "react-icons/fa";
+import { GraduationCap, School, BookOpen } from "lucide-react";
 
 // Education details array
 const educationDetails = [
@@ -9,19 +9,19 @@ const educationDetails = [
     institution: "Lovely Professional University, Punjab",
     year: "Aug 2016 - May 2019",
     degree: "Mechanical Engineer",
-    icon: <FaGraduationCap />,
+    icon: <GraduationCap />,
   },
   {
     title: "Diploma in Mechanical Engineering",
     institution: "Guru Nanak Dev Co-Ed. Polytechnic, New Delhi",
     year: "August 2013 - May 2016",
-    icon: <FaUniversity />,
+    icon: <School />,
   },
   {
     title: "X (CBSE)",
     institution: "Rajkiya Sarvodaya Bal Vidyalaya, New Delhi",
     year: "June 2012 - March 2013",
-    icon: <FaBookOpen />,
+    icon: <BookOpen />,
   },
 ];
 
@@ -116,10 +116,49 @@ const Education = () => {
 
   const renderedCard = useMemo(() => <EducationCard data={selected} />, [selected]);
 
+  // Prevent context menu (right-click)
+  const handleContextMenu = (e) => {
+    e.preventDefault();
+  };
+
+  // Function to disable text selection
+  const handleSelectStart = (e) => {
+    e.preventDefault();
+  };
+
+  // Function to disable drag
+  const handleDragStart = (e) => {
+    e.preventDefault();
+  };
+
+  // Function to disable keyboard shortcuts
+  const handleKeyDown = (e) => {
+    // Disable Ctrl+A (Select All), Ctrl+C (Copy), Ctrl+V (Paste), F12 (DevTools)
+    if (e.ctrlKey && (e.key === 'a' || e.key === 'c' || e.key === 'v')) {
+      e.preventDefault();
+    }
+    if (e.key === 'F12') {
+      e.preventDefault();
+    }
+  };
+
   return (
-    <section id="education" className="py-10 px-4 sm:px-6 md:px-16 bg-white">
+    <section 
+      id="education" 
+      className="py-10 px-4 sm:px-6 md:px-16 bg-white select-none"
+      onContextMenu={handleContextMenu}
+      onSelectStart={handleSelectStart}
+      onDragStart={handleDragStart}
+      onKeyDown={handleKeyDown}
+      style={{ 
+        userSelect: 'none',
+        WebkitUserSelect: 'none',
+        MozUserSelect: 'none',
+        msUserSelect: 'none'
+      }}
+    >
       <div className="container mx-auto max-w-screen-xl">
-        <h2 className="text-3xl md:text-5xl font-extrabold text-gray-800 mb-8 md:mb-10 border-b-2 pb-2 border-blue-500">
+        <h2 className="text-3xl md:text-5xl font-extrabold text-gray-800 mb-8 md:mb-4 pb-2 border-blue-500">
           Education
         </h2>
 

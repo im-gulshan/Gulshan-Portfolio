@@ -1,32 +1,32 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaCode, FaPlug, FaTachometerAlt, FaRobot, FaRegKeyboard  } from "react-icons/fa";
+import { Code, Plug, Gauge, Bot, Keyboard } from "lucide-react";
 
 // Skill categories data
 const skillCategories = [
   {
     title: "Programming Languages",
-    icon: <FaCode />,
+    icon: <Code />,
     items: ["Java (OOPs Concepts)","TypeScript", "SQL"],
   },
   {
     title: "Automation Testing",
-    icon: <FaRobot />,
+    icon: <Bot />,
     items: ["Selenium & Playwright", "Cucumber (BDD Framework)", "Automation Framework Design (POM, Data-Driven, Hybrid)", "Test Script Development & Maintenance", "Cross-Browser & Parallel Testing", "Dynamic Locators & Wait Strategies", "UI Automation"],
   },
   {
     title: "Performance Testing",
-    icon: <FaTachometerAlt />,
+    icon: <Gauge />,
     items: ["JMeter (Script Development & Execution)", "Performance Test Planning & Strategy", "Load & Stress Testing", "Endurance Testing", "Performance Bottleneck Analysis", "Test Result Analysis & Reporting", "Correlation & Parameterization in JMeter", "Test Data Management & Load Simulation", "Scalability Testing"],
   },
   {
     title: "Manual Testing",
-    icon: <FaRegKeyboard />,
+    icon: <Keyboard />,
     items: ["Test Case Design & Execution", "Functional & Regression Testing", "Smoke & Sanity Testing", "Integration Testing", "User Acceptance Testing (UAT)", "Bug Reporting & Defect Tracking", "JIRA & Azure Boards", "Test Planning & Coverage Analysis", "Agile Testing Methodology"],
   },
   {
     title: "API Testing",
-    icon: <FaPlug />,
+    icon: <Plug />,
     items: ["Manual API Testing (Postman)", "REST API Testing (GET, POST, PUT, DELETE)", "JSON Data Validation", "Authentication", "API Response Validation & Assertions", "API Performance & Load Testing", "Postman Scripting & Collections"],
   },
 ];
@@ -131,10 +131,52 @@ const Skills = () => {
 
   const renderedCard = useMemo(() => <SkillCategoryCard category={selectedCategory} />, [selectedCategory]);
 
+  // Function to disable context menu
+  const handleContextMenu = (e) => {
+    e.preventDefault();
+  };
+
+  // Function to disable text selection
+  const handleSelectStart = (e) => {
+    e.preventDefault();
+  };
+
+  // Function to disable drag
+  const handleDragStart = (e) => {
+    e.preventDefault();
+  };
+
+  // Function to disable keyboard shortcuts
+  const handleKeyDown = (e) => {
+    // Disable Ctrl+A (Select All), Ctrl+C (Copy), Ctrl+V (Paste), F12 (DevTools)
+    if (e.ctrlKey && (e.key === 'a' || e.key === 'c' || e.key === 'v')) {
+      e.preventDefault();
+    }
+    if (e.key === 'F12') {
+      e.preventDefault();
+    }
+  };
+
   return (
-    <section id="skills" className="py-10 px-4 sm:px-6 md:px-16 bg-white">
+    <section 
+      id="skills" 
+      className="py-10 px-4 sm:px-6 md:px-16 bg-white select-none"
+      onContextMenu={handleContextMenu}
+      onSelectStart={handleSelectStart}
+      onDragStart={handleDragStart}
+      onKeyDown={handleKeyDown}
+      style={{ 
+        userSelect: 'none',
+        webkitUserSelect: 'none',
+        mozUserSelect: 'none',
+        msUserSelect: 'none',
+        webkitTouchCallout: 'none',
+        webkitUserDrag: 'none',
+        khtmlUserSelect: 'none'
+      }}
+    >
       <div className="container mx-auto max-w-screen-xl">
-        <h2 className="text-3xl md:text-5xl font-extrabold text-gray-800 mb-8 md:mb-10 border-b-2 pb-2 border-blue-500">
+        <h2 className="text-3xl md:text-5xl font-extrabold text-gray-800 mb-8 md:mb-4 pb-2 border-blue-500">
           Skills
         </h2>
 
