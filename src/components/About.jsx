@@ -5,10 +5,18 @@ import { Mail, Linkedin } from "lucide-react";
 const About = () => {
   const aboutRef = useRef(null);
   const [showScrollIndicator, setShowScrollIndicator] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // Fix: Move window.innerWidth to useEffect to avoid hydration issues
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
     const currentRef = aboutRef.current;
-    const isMobile = window.innerWidth <= 768;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -24,56 +32,19 @@ const About = () => {
     }
 
     return () => {
+      window.removeEventListener('resize', checkMobile);
       if (currentRef) {
         observer.unobserve(currentRef);
       }
     };
-  }, []);
+  }, [isMobile]);
 
-  // Function to disable context menu
-  const handleContextMenu = (e) => {
-    e.preventDefault();
-  };
-
-  // Function to disable text selection
-  const handleSelectStart = (e) => {
-    e.preventDefault();
-  };
-
-  // Function to disable drag
-  const handleDragStart = (e) => {
-    e.preventDefault();
-  };
-
-  // Function to disable keyboard shortcuts
-  const handleKeyDown = (e) => {
-    // Disable Ctrl+A (Select All), Ctrl+C (Copy), Ctrl+V (Paste), F12 (DevTools)
-    if (e.ctrlKey && (e.key === 'a' || e.key === 'c' || e.key === 'v')) {
-      e.preventDefault();
-    }
-    if (e.key === 'F12') {
-      e.preventDefault();
-    }
-  };
 
   return (
     <section
       id="about"
       ref={aboutRef}
-      className="relative min-h-screen flex items-center px-4 sm:px-6 md:px-20 py-20 bg-white select-none"
-      onContextMenu={handleContextMenu}
-      onSelectStart={handleSelectStart}
-      onDragStart={handleDragStart}
-      onKeyDown={handleKeyDown}
-      style={{ 
-        userSelect: 'none',
-        webkitUserSelect: 'none',
-        mozUserSelect: 'none',
-        msUserSelect: 'none',
-        webkitTouchCallout: 'none',
-        webkitUserDrag: 'none',
-        khtmlUserSelect: 'none'
-      }}
+      className="relative min-h-screen flex items-center px-4 sm:px-6 md:px-20 py-20 bg-white"
     >
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-center gap-10 text-center md:text-left">
 
@@ -89,33 +60,27 @@ const About = () => {
             src={`${process.env.PUBLIC_URL}/gulshan-kumar.jpg`}
             alt="Gulshan Kumar Profile"
             className="w-full h-full object-cover"
-            onDragStart={handleDragStart}
           />
         </motion.div>
 
         {/* About Text */}
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
-          className="max-w-2xl px-2"
-        >
-          <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
+        <div className="max-w-2xl px-2">
+          <motion.p 
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="text-base sm:text-lg text-gray-600 leading-relaxed"
+          >
             Hello! I'm <strong className="text-blue-600">Gulshan Kumar</strong>, a QA Engineer-II at <strong className="text-blue-600">S&P Global</strong> with 6+ years of experience in Automation, Performance, API, and Manual Testing. Passionate about ensuring software quality, collaborating with teams, and always learning new technologies.
-          </p>
+          </motion.p>
 
           {/* Email and LinkedIn */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8 text-blue-500 text-base sm:text-lg mt-6 justify-center md:justify-start"
-          >
+          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8 text-blue-500 text-base sm:text-lg mt-6 justify-center md:justify-start">
             <a
               href="mailto:kgulshan230@gmail.com"
-              className="flex items-center gap-2 hover:underline hover:text-blue-600"
+              className="flex items-center gap-2 hover:underline hover:text-blue-600 cursor-pointer transition-colors duration-200"
+              style={{ pointerEvents: 'auto', zIndex: 10 }}
             >
               <Mail className="text-xl sm:text-2xl" />
               <span>kgulshan230@gmail.com</span>
@@ -125,15 +90,16 @@ const About = () => {
               href="https://www.linkedin.com/in/gulshan98/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 hover:underline hover:text-blue-600"
+              className="flex items-center gap-2 hover:underline hover:text-blue-600 cursor-pointer transition-colors duration-200"
+              style={{ pointerEvents: 'auto', zIndex: 10 }}
             >
               <Linkedin className="text-xl sm:text-2xl" />
               <span>LinkedIn Profile</span>
             </a>
-          </motion.div>
+          </div>
 
-          {/* Mobile-only scroll down indicator below LinkedIn */}
-          {showScrollIndicator && window.innerWidth <= 768 &&(
+          {/* Mobile-only scroll down indicator */}
+          {showScrollIndicator && isMobile && (
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: [10, 0, 10] }}
@@ -147,14 +113,14 @@ const About = () => {
             </motion.div>
           )}
 
-          {/* Scroll Down Indicator for Web Only */}
-          {showScrollIndicator && window.innerWidth > 768 && (
+          {/* Desktop scroll down indicator */}
+          {showScrollIndicator && !isMobile && (
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: [10, 0, 10] }}
               transition={{ duration: 1.5, repeat: Infinity }}
               className="absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-6 text-blue-600 text-sm pointer-events-none flex flex-col items-center space-y-2"
-              style={{ transform: 'translateX(-10%)' }} // Move it to the left
+              style={{ transform: 'translateX(-10%)' }}
             >
               <span>Scroll Down</span>
               <svg className="w-6 h-6 mt-1 animate-bounce" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -163,7 +129,7 @@ const About = () => {
             </motion.div>
           )}
 
-        </motion.div>
+        </div>
       </div>
     </section>
   );
