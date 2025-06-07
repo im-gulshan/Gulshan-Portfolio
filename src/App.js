@@ -52,19 +52,19 @@ function App() {
   return (
     <ThemeProvider>
       <div>
-        <Header />
+        <Header setActiveTab={setActiveTab} />
         <About />
 
         {/* Tab Navigation */}
-        <div id="sections-container" className="bg-white py-4 sticky top-0 z-50 shadow-sm">
-          <div className="max-w-6xl mx-auto px-4">
-            <div className="flex justify-center gap-6 overflow-x-auto hide-scrollbar">
+        <div id="sections-container" className="bg-white py-5 sm:py-4 sticky top-0 z-50 shadow-sm">
+          <div className="max-w-6xl mx-auto px-2 sm:px-4">
+            <div className="grid grid-cols-5 sm:flex sm:justify-center gap-1 sm:gap-6">
               {navigationTabs.map(tab => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`px-4 py-2 font-medium text-sm transition-all whitespace-nowrap
-                    ${activeTab === tab.id
+                  className={`px-2 sm:px-4 py-2 font-medium text-xs sm:text-sm transition-all whitespace-nowrap
+            ${activeTab === tab.id
                       ? 'text-blue-600 border-b-2 border-blue-600'
                       : 'text-gray-600 hover:text-blue-600'
                     }`}
