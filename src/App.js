@@ -1,8 +1,8 @@
 import './App.css';
-import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
 import ReactGA from 'react-ga4';
 
+// Component imports
 import Header from './components/Header';
 import About from './components/About';
 import Projects from './components/Projects';
@@ -12,31 +12,75 @@ import Experience from './components/Experience';
 import ScrollToTopButton from './components/ScrollToTopButton';
 import Footer from './components/Footer';
 import Education from './components/Education';
-import { ThemeProvider } from './components/ThemeContext'; // ✅ import the provider
+import { ThemeProvider } from './components/ThemeContext';
 
-const TRACKING_ID = "G-W9BM9GSX4M"; // your Measurement ID
-
+// Google Analytics configuration
+const TRACKING_ID = "G-W9BM9GSX4M";
 ReactGA.initialize(TRACKING_ID);
 
 function App() {
+  // State for active tab management
+  const [activeTab, setActiveTab] = useState('experience');
 
-  const location = useLocation();
+  // Navigation tabs configuration
+  const navigationTabs = [
+    { id: 'experience', label: 'Experience' },
+    { id: 'skills', label: 'Skills' },
+    { id: 'projects', label: 'Projects' },
+    { id: 'education', label: 'Education' },
+    { id: 'contact', label: 'Contact' }
+  ];
 
-  useEffect(() => {
-    ReactGA.send({ hitType: "pageview", page: location.pathname });
-  }, [location]);
-
+  // Render the active section based on selected tab
+  const renderActiveSection = () => {
+    switch (activeTab) {
+      case 'experience':
+        return <Experience />;
+      case 'skills':
+        return <Skills />;
+      case 'projects':
+        return <Projects />;
+      case 'education':
+        return <Education />;
+      case 'contact':
+        return <Contact />;
+      default:
+        return <Experience />;
+    }
+  };
 
   return (
     <ThemeProvider>
       <div>
         <Header />
         <About />
-        <Experience />
-        <Skills />
-        <Projects />
-        <Education />
-        <Contact />
+
+        {/* Tab Navigation */}
+        <div id="sections-container" className="bg-white py-4 sticky top-0 z-50 shadow-sm">
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="flex justify-center gap-6 overflow-x-auto hide-scrollbar">
+              {navigationTabs.map(tab => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`px-4 py-2 font-medium text-sm transition-all whitespace-nowrap
+                    ${activeTab === tab.id
+                      ? 'text-blue-600 border-b-2 border-blue-600'
+                      : 'text-gray-600 hover:text-blue-600'
+                    }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Content Section */}
+        <div className="min-h-screen bg-white">
+          {renderActiveSection()}
+        </div>
+
         <ScrollToTopButton />
         <Footer />
       </div>
