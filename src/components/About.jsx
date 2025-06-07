@@ -39,6 +39,13 @@ const About = () => {
     };
   }, [isMobile]);
 
+  const handleScrollClick = () => {
+    const sectionsDiv = document.querySelector('#sections-container'); // Add this ID to your sections container
+    if (sectionsDiv) {
+      sectionsDiv.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
 
   return (
     <section
@@ -104,7 +111,8 @@ const About = () => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: [10, 0, 10] }}
               transition={{ duration: 1.5, repeat: Infinity }}
-              className="block sm:hidden mt-6 text-blue-600 text-sm flex flex-col items-center pointer-events-none"
+              className="block sm:hidden mt-6 text-blue-600 text-sm flex flex-col items-center cursor-pointer"
+          onClick={handleScrollClick}
             >
               <span>Scroll Down</span>
               <svg className="w-6 h-6 mt-1 animate-bounce" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -119,8 +127,9 @@ const About = () => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: [10, 0, 10] }}
               transition={{ duration: 1.5, repeat: Infinity }}
-              className="absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-6 text-blue-600 text-sm pointer-events-none flex flex-col items-center space-y-2"
-              style={{ transform: 'translateX(-10%)' }}
+              className="absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-6 text-blue-600 text-sm cursor-pointer flex flex-col items-center space-y-2 hover:text-blue-700"
+          style={{ transform: 'translateX(-10%)' }}
+          onClick={handleScrollClick}
             >
               <span>Scroll Down</span>
               <svg className="w-6 h-6 mt-1 animate-bounce" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
