@@ -1,36 +1,49 @@
 # Gulshan Kumar's Portfolio
 
-Welcome to my personal portfolio website! This project showcases my skills, experience, and projects as a QA Engineer-II at S&P Global.
+## 🎯 About the Project
 
-## About the Project
+This is my personal portfolio website created using AI tools like **ChatGPT** and **Claude AI**. I did not write any code manually — the entire site was built through AI-generated code based on my detailed prompts. The goal was to create a modern and professional portfolio while exploring how AI can assist in development.
 
-This portfolio was built using **React**, **Tailwind CSS**, and **Framer Motion** to create a modern, responsive, and interactive user experience. It highlights my expertise in Automation, Performance, API, and Manual Testing, along with links to my email and LinkedIn profile.
+## 🧠 How It Was Built
 
-## Features
+- Used **ChatGPT** and **Claude AI** to generate all the code
+- Gave structured prompts for layout, design, and animations
+- Iterated based on visual output and improved via AI suggestions
+- Deployed using GitHub Pages
 
-- **Responsive Design**: Works seamlessly on all devices.
-- **Interactive Animations**: Powered by Framer Motion for smooth transitions.
-- **Contact Section**: Includes email and LinkedIn links for easy communication.
-- **Custom Favicon**: Displays my profile picture in the browser tab.
+## ✅ QA Involvement
 
-## Deployment
+Although I didn't write the code, I applied my **QA expertise** throughout the project:
 
-This project is deployed using **GitHub Pages**. You can view the live site here: [Gulshan Kumar's Portfolio](https://im-gulshan.github.io/Gulshan-Portfolio/).
+- **Manual Testing**
+  - Checked layout, design, and responsiveness on different devices
+  - Verified all links, navigation, and scroll behaviors
+  - Reviewed UI consistency and smoothness
 
-## Technologies Used
+- **Automation Testing (Basic)**
+  - Wrote Playwright test cases for UI validation
 
-- **React**: For building the user interface.
-- **Tailwind CSS**: For styling the components.
-- **Framer Motion**: For animations and transitions.
-- **React Icons**: For adding icons to the site.
-- **GitHub Pages**: For hosting the portfolio.
+These practices helped ensure the final site works well across browsers, screen sizes, and interactions.
 
-## Contact
+## 🌐 Live Website
 
-Feel free to reach out to me via:
-- **Email**: [kgulshan230@outlook.com](mailto:kgulshan230@outlook.com)
-- **LinkedIn**: [https://www.linkedin.com/in/gulshan98/](https://www.linkedin.com/in/gulshan98/)
+👉 [im-gulshan.github.io/Gulshan-Portfolio](https://im-gulshan.github.io/Gulshan-Portfolio/)
 
----
+## 🛠️ Tools & Technologies Used (via AI-generated code)
 
-Thank you for visiting my portfolio!
+- **Frontend**: React, Tailwind CSS, Framer Motion  
+- **Hosting**: GitHub Pages  
+- **Testing Tools**: Playwright with TypeScript 
+- **Version Control**: Git & GitHub
+
+## 📌 Project Goals
+
+- Build a portfolio without writing code, using only GenAI assistance  
+- Practice prompt engineering to guide full UI generation  
+- Apply QA practices on an AI-generated application  
+- Explore AI's role in real-world workflows for testers
+
+## 📫 Contact
+
+- **Email**: [kgulshan230@gmail.com](mailto:kgulshan230@gmail.com)  
+- **LinkedIn**: [linkedin.com/in/gulshan98](https://www.linkedin.com/in/gulshan98/)
