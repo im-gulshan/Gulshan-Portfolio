@@ -13,7 +13,7 @@ const projectList = [
       "Dynamic locators for interacting with changing web elements.",
       "Reusable scripts for setting authentication tokens.",
     ],
-    link: "https://github.com/im-gulshan/PlaywrightAutomation",
+    link: "https://github.com/im-gulshan/PlaywrightFramework",
     icon: <Github />,
   },
   {
